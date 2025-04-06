@@ -1,21 +1,48 @@
--- exercício 1.1 com estrutura FOR para números positivos(20 a 50)
-DO
+-- exercício 1.1 com estrutura FOREACH para números positivos(20 a 50)
+DO 
 $$
-DECLARE 
+DECLARE
+     numeros INT[] := ARRAY[
+          valor_aleatorio_entre(20, 50),
+          valor_aleatorio_entre(20, 50),
+          valor_aleatorio_entre(20, 50),
+          valor_aleatorio_entre(20, 50),
+          valor_aleatorio_entre(20, 50),
+          valor_aleatorio_entre(20, 50)
+     ];
      numero INT;
      soma INT := 0;
 BEGIN
-RAISE NOTICE 'Números Positivos (20 a 50) - FOR';
-     FOR i IN 1..6 LOOP
-          numero := valor_aleatorio_entre(20, 50);
+RAISE NOTICE 'Números Positivos (20 a 50) - FOREACH';
+     FOREACH numero IN ARRAY numeros LOOP    
           IF numero > 0 THEN
                soma := soma + 1;
           END IF;
-          RAISE NOTICE '%', numero;
+          RAISE NOTICE '%',numero;
      END LOOP;
      RAISE NOTICE '% valor(es) positivo(s)', soma;
 END;
 $$
+
+
+-- exercício 1.1 com estrutura FOR para números positivos(20 a 50)
+-- DO
+-- $$
+-- DECLARE 
+--      numero INT;
+--      soma INT := 0;
+-- BEGIN
+-- RAISE NOTICE 'Números Positivos (20 a 50) - FOR';
+--      FOR i IN 1..6 LOOP
+--           numero := valor_aleatorio_entre(20, 50);
+--           IF numero > 0 THEN
+--                soma := soma + 1;
+--           END IF;
+--           RAISE NOTICE '%', numero;
+--      END LOOP;
+--      RAISE NOTICE '% valor(es) positivo(s)', soma;
+-- END;
+-- $$
 
 
 -- exercício 1.1 com estrutura WHILE para números positivos(20 a 50)

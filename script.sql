@@ -1,15 +1,13 @@
--- exercício 1.1 com estrutura WHILE para números positivos(20 a 50)
+-- exercício 1.1 com estrutura FOR para números positivos(20 a 50)
 DO
 $$
 DECLARE 
-     contador INT := 0;
      numero INT;
      soma INT := 0;
 BEGIN
-RAISE NOTICE 'Números Positivos (20 a 50) - WHILE';
-     WHILE contador < 6 LOOP
+RAISE NOTICE 'Números Positivos (20 a 50) - FOR';
+     FOR i IN 1..6 LOOP
           numero := valor_aleatorio_entre(20, 50);
-          contador := contador + 1;
           IF numero > 0 THEN
                soma := soma + 1;
           END IF;
@@ -18,6 +16,28 @@ RAISE NOTICE 'Números Positivos (20 a 50) - WHILE';
      RAISE NOTICE '% valor(es) positivo(s)', soma;
 END;
 $$
+
+
+-- exercício 1.1 com estrutura WHILE para números positivos(20 a 50)
+-- DO
+-- $$
+-- DECLARE 
+--      contador INT := 0;
+--      numero INT;
+--      soma INT := 0;
+-- BEGIN
+-- RAISE NOTICE 'Números Positivos (20 a 50) - WHILE';
+--      WHILE contador < 6 LOOP
+--           numero := valor_aleatorio_entre(20, 50);
+--           contador := contador + 1;
+--           IF numero > 0 THEN
+--                soma := soma + 1;
+--           END IF;
+--           RAISE NOTICE '%', numero;
+--      END LOOP;
+--      RAISE NOTICE '% valor(es) positivo(s)', soma;
+-- END;
+-- $$
 
 
 -- exercício 1.1 com estrutura LOOP para números positivos(20 a 50)

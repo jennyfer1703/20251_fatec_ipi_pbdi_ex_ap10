@@ -1,29 +1,52 @@
--- exercício 1.1 com estrutura FOREACH para números positivos
-DO 
+-- exercício 1.1 com estrutura LOOP para números positivos(20 a 50)
+DO
 $$
-DECLARE
-     numeros INT[] := ARRAY[
-     valor_aleatorio_entre(0,100) - 50,
-     valor_aleatorio_entre(0,100) - 50,
-     valor_aleatorio_entre(0,100) - 50,
-     valor_aleatorio_entre(0,100) - 50,
-     valor_aleatorio_entre(0,100) - 50,
-     valor_aleatorio_entre(0,100) - 50
-     ];
+DECLARE 
+     contador INT := 1;
      numero INT;
      soma INT := 0;
 BEGIN
-RAISE NOTICE 'Números Positivos (-50 a 50 ) - FOREACH
-obs: Seis valores, negativos e/ou positivos';
-     FOREACH numero IN ARRAY numeros LOOP    
+RAISE NOTICE 'Números Positivos (20 a 50) - LOOP';
+     LOOP
+          numero := valor_aleatorio_entre(20, 50);
+          contador := contador + 1;
           IF numero > 0 THEN
                soma := soma + 1;
           END IF;
-          RAISE NOTICE '%',numero;
+          RAISE NOTICE '%', numero;
+          EXIT WHEN contador > 6;
      END LOOP;
-     RAISE NOTICE '%', soma;
+     RAISE NOTICE '% valor(es) positivo(s)', soma;
 END;
 $$
+
+
+-- exercício 1.1 com estrutura FOREACH para números positivos
+-- DO 
+-- $$
+-- DECLARE
+--      numeros INT[] := ARRAY[
+--      valor_aleatorio_entre(0,100) - 50,
+--      valor_aleatorio_entre(0,100) - 50,
+--      valor_aleatorio_entre(0,100) - 50,
+--      valor_aleatorio_entre(0,100) - 50,
+--      valor_aleatorio_entre(0,100) - 50,
+--      valor_aleatorio_entre(0,100) - 50
+--      ];
+--      numero INT;
+--      soma INT := 0;
+-- BEGIN
+-- RAISE NOTICE 'Números Positivos (-50 a 50 ) - FOREACH
+-- obs: Seis valores, negativos e/ou positivos';
+--      FOREACH numero IN ARRAY numeros LOOP    
+--           IF numero > 0 THEN
+--                soma := soma + 1;
+--           END IF;
+--           RAISE NOTICE '%',numero;
+--      END LOOP;
+--      RAISE NOTICE '%', soma;
+-- END;
+-- $$
 
 -- exercício 1.1 com estrutura FOR para números positivos
 -- DO

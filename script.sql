@@ -1,5 +1,4 @@
-
--- exercício 1.1 com estrutura LOOP para soma dos números ímpares
+-- exercício 1.1 com estrutura WHILE para soma dos números ímpares
 DO
 $$
 DECLARE 
@@ -10,9 +9,8 @@ DECLARE
     i INT;
     soma INT := 0;
 BEGIN
-    RAISE NOTICE 'Soma dos ímpares entre dois valores - LOOP';
-    RAISE NOTICE 'Valores sorteados: % e %', n1, n2;
-
+RAISE NOTICE 'Soma dos ímpares entre dois valores - WHILE';
+RAISE NOTICE 'Valores sorteados: % e %', n1, n2;
     IF n1 < n2 THEN
         inicio := n1 + 1;
         fim := n2 - 1;
@@ -20,22 +18,54 @@ BEGIN
         inicio := n2 + 1;
         fim := n1 - 1;
     END IF;
-
     RAISE NOTICE 'Intervalo considerado: % até %', inicio, fim;
     i := inicio;
-    LOOP
-        EXIT WHEN i > fim;
+    WHILE i <= fim LOOP
         IF i % 2 != 0 THEN
-            soma := soma + i;
             RAISE NOTICE 'Ímpar encontrado: %', i;
+            soma := soma + i;
         END IF;
         i := i + 1;
     END LOOP;
     RAISE NOTICE 'Soma dos ímpares: %', soma;
-END
-$$
+END;
+$$;
 
+-- exercício 1.1 com estrutura LOOP para soma dos números ímpares
+-- DO
+-- $$
+-- DECLARE 
+--     n1 INT := valor_aleatorio_entre(0, 100) - 50;
+--     n2 INT := valor_aleatorio_entre(0, 100) - 50;
+--     inicio INT;
+--     fim INT;
+--     i INT;
+--     soma INT := 0;
+-- BEGIN
+--     RAISE NOTICE 'Soma dos ímpares entre dois valores - LOOP';
+--     RAISE NOTICE 'Valores sorteados: % e %', n1, n2;
 
+--     IF n1 < n2 THEN
+--         inicio := n1 + 1;
+--         fim := n2 - 1;
+--     ELSE
+--         inicio := n2 + 1;
+--         fim := n1 - 1;
+--     END IF;
+
+--     RAISE NOTICE 'Intervalo considerado: % até %', inicio, fim;
+--     i := inicio;
+--     LOOP
+--         EXIT WHEN i > fim;
+--         IF i % 2 != 0 THEN
+--             soma := soma + i;
+--             RAISE NOTICE 'Ímpar encontrado: %', i;
+--         END IF;
+--         i := i + 1;
+--     END LOOP;
+--     RAISE NOTICE 'Soma dos ímpares: %', soma;
+-- END
+-- $$
 
 -- exercício 1.1 com estrutura FOREACH para números positivos(20 a 50)
 -- DO 

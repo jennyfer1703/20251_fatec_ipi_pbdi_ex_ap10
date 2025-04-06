@@ -1,4 +1,4 @@
--- exercício 1.1 com estrutura FOR para soma dos números ímpares
+-- exercício 1.1 com estrutura FOREACH para soma dos números ímpares
 DO
 $$
 DECLARE 
@@ -6,10 +6,11 @@ DECLARE
     n2 INT := valor_aleatorio_entre(0, 100) - 50;
     inicio INT;
     fim INT;
-    i INT;
+    numeros INT[];
+    num INT;
     soma INT := 0;
 BEGIN
-    RAISE NOTICE 'Soma dos ímpares entre dois valores - FOR';
+    RAISE NOTICE 'Soma dos ímpares entre dois valores - FOREACH';
     RAISE NOTICE 'Valores sorteados: % e %', n1, n2;
 
     IF n1 < n2 THEN
@@ -19,16 +20,51 @@ BEGIN
         inicio := n2 + 1;
         fim := n1 - 1;
     END IF;
+
     RAISE NOTICE 'Intervalo considerado: % até %', inicio, fim;
-    FOR i IN inicio..fim LOOP
-        IF i % 2 != 0 THEN
-            RAISE NOTICE 'Ímpar encontrado: %', i;
-            soma := soma + i;
+    numeros := ARRAY(SELECT generate_series(inicio, fim));
+    FOREACH num IN ARRAY numeros LOOP
+        IF num % 2 != 0 THEN
+            RAISE NOTICE 'Ímpar encontrado: %', num;
+            soma := soma + num;
         END IF;
     END LOOP;
     RAISE NOTICE 'Soma dos ímpares: %', soma;
 END
 $$
+
+
+-- exercício 1.1 com estrutura FOR para soma dos números ímpares
+--DO
+-- $$
+-- DECLARE 
+--     n1 INT := valor_aleatorio_entre(0, 100) - 50;
+--     n2 INT := valor_aleatorio_entre(0, 100) - 50;
+--     inicio INT;
+--     fim INT;
+--     i INT;
+--     soma INT := 0;
+-- BEGIN
+--     RAISE NOTICE 'Soma dos ímpares entre dois valores - FOR';
+--     RAISE NOTICE 'Valores sorteados: % e %', n1, n2;
+
+--     IF n1 < n2 THEN
+--         inicio := n1 + 1;
+--         fim := n2 - 1;
+--     ELSE
+--         inicio := n2 + 1;
+--         fim := n1 - 1;
+--     END IF;
+--     RAISE NOTICE 'Intervalo considerado: % até %', inicio, fim;
+--     FOR i IN inicio..fim LOOP
+--         IF i % 2 != 0 THEN
+--             RAISE NOTICE 'Ímpar encontrado: %', i;
+--             soma := soma + i;
+--         END IF;
+--     END LOOP;
+--     RAISE NOTICE 'Soma dos ímpares: %', soma;
+-- END
+-- $$
 
 -- exercício 1.1 com estrutura WHILE para soma dos números ímpares
 -- DO

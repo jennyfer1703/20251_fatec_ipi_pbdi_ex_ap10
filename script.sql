@@ -1,14 +1,14 @@
--- exercício 1.1 com estrutura LOOP para números positivos
+-- exercício 1.1 com estrutura WHILE para números positivos
 DO
 $$
 DECLARE 
-     contador INT := 1;
+     contador INT := 0;
      numero INT;
      soma INT := 0;
 BEGIN
-RAISE NOTICE 'Números Positivos (-50 a 50 ) - LOOP
+RAISE NOTICE 'Números Positivos (-50 a 50 ) - WHILE
 obs: Seis valores, negativos e/ou positivos.';
-     LOOP
+     WHILE contador < 6 LOOP
           numero := valor_aleatorio_entre(0,100) -50;
           contador := contador + 1;
           CASE 
@@ -20,12 +20,41 @@ obs: Seis valores, negativos e/ou positivos.';
                ELSE 
                soma := soma;
           END CASE;
-          RAISE NOTICE '%', numero;
-          EXIT WHEN contador > 6;
+          RAISE NOTICE '% ',numero;
      END LOOP;
      RAISE NOTICE '% valor(es) positivo(s)', soma;
 END;
 $$
+----
+
+-- exercício 1.1 com estrutura LOOP para números positivos
+-- DO
+-- $$
+-- DECLARE 
+--      contador INT := 1;
+--      numero INT;
+--      soma INT := 0;
+-- BEGIN
+-- RAISE NOTICE 'Números Positivos (-50 a 50 ) - LOOP
+-- obs: Seis valores, negativos e/ou positivos.';
+--      LOOP
+--           numero := valor_aleatorio_entre(0,100) -50;
+--           contador := contador + 1;
+--           CASE 
+--                WHEN  numero = 0 THEN
+--                     contador := contador - 1;
+               
+--                WHEN numero > 0 THEN
+--                soma := soma + 1;
+--                ELSE 
+--                soma := soma;
+--           END CASE;
+--           RAISE NOTICE '%', numero;
+--           EXIT WHEN contador > 6;
+--      END LOOP;
+--      RAISE NOTICE '% valor(es) positivo(s)', soma;
+-- END;
+-- $$
 
 -- exercício 1.1 com estrutura FOREACH para números pares
 -- DO

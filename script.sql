@@ -1,28 +1,67 @@
--- exercício 1.1 com estrutura FOREACH para números positivos(20 a 50)
-DO 
+
+-- exercício 1.1 com estrutura LOOP para soma dos números ímpares
+DO
 $$
-DECLARE
-     numeros INT[] := ARRAY[
-          valor_aleatorio_entre(20, 50),
-          valor_aleatorio_entre(20, 50),
-          valor_aleatorio_entre(20, 50),
-          valor_aleatorio_entre(20, 50),
-          valor_aleatorio_entre(20, 50),
-          valor_aleatorio_entre(20, 50)
-     ];
-     numero INT;
-     soma INT := 0;
+DECLARE 
+    n1 INT := valor_aleatorio_entre(0, 100) - 50;
+    n2 INT := valor_aleatorio_entre(0, 100) - 50;
+    inicio INT;
+    fim INT;
+    i INT;
+    soma INT := 0;
 BEGIN
-RAISE NOTICE 'Números Positivos (20 a 50) - FOREACH';
-     FOREACH numero IN ARRAY numeros LOOP    
-          IF numero > 0 THEN
-               soma := soma + 1;
-          END IF;
-          RAISE NOTICE '%',numero;
-     END LOOP;
-     RAISE NOTICE '% valor(es) positivo(s)', soma;
-END;
+    RAISE NOTICE 'Soma dos ímpares entre dois valores - LOOP';
+    RAISE NOTICE 'Valores sorteados: % e %', n1, n2;
+
+    IF n1 < n2 THEN
+        inicio := n1 + 1;
+        fim := n2 - 1;
+    ELSE
+        inicio := n2 + 1;
+        fim := n1 - 1;
+    END IF;
+
+    RAISE NOTICE 'Intervalo considerado: % até %', inicio, fim;
+    i := inicio;
+    LOOP
+        EXIT WHEN i > fim;
+        IF i % 2 != 0 THEN
+            soma := soma + i;
+            RAISE NOTICE 'Ímpar encontrado: %', i;
+        END IF;
+        i := i + 1;
+    END LOOP;
+    RAISE NOTICE 'Soma dos ímpares: %', soma;
+END
 $$
+
+
+
+-- exercício 1.1 com estrutura FOREACH para números positivos(20 a 50)
+-- DO 
+-- $$
+-- DECLARE
+--      numeros INT[] := ARRAY[
+--           valor_aleatorio_entre(20, 50),
+--           valor_aleatorio_entre(20, 50),
+--           valor_aleatorio_entre(20, 50),
+--           valor_aleatorio_entre(20, 50),
+--           valor_aleatorio_entre(20, 50),
+--           valor_aleatorio_entre(20, 50)
+--      ];
+--      numero INT;
+--      soma INT := 0;
+-- BEGIN
+-- RAISE NOTICE 'Números Positivos (20 a 50) - FOREACH';
+--      FOREACH numero IN ARRAY numeros LOOP    
+--           IF numero > 0 THEN
+--                soma := soma + 1;
+--           END IF;
+--           RAISE NOTICE '%',numero;
+--      END LOOP;
+--      RAISE NOTICE '% valor(es) positivo(s)', soma;
+-- END;
+-- $$
 
 
 -- exercício 1.1 com estrutura FOR para números positivos(20 a 50)

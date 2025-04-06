@@ -1,37 +1,72 @@
--- exercício 1.1 com estrutura FOREACH para soma dos números ímpares
+-- exercício 1.2 - MATRIZ
 DO
 $$
-DECLARE 
-    n1 INT := valor_aleatorio_entre(0, 100) - 50;
-    n2 INT := valor_aleatorio_entre(0, 100) - 50;
-    inicio INT;
-    fim INT;
-    numeros INT[];
-    num INT;
-    soma INT := 0;
+DECLARE
+    matriz INT[][] := ARRAY[
+        [0,0,0],
+        [0,0,0],
+        [0,0,0]
+    ];
+    i INT;
+    j INT;
+    determinante INT;
+    linha INT[];
 BEGIN
-    RAISE NOTICE 'Soma dos ímpares entre dois valores - FOREACH';
-    RAISE NOTICE 'Valores sorteados: % e %', n1, n2;
-
-    IF n1 < n2 THEN
-        inicio := n1 + 1;
-        fim := n2 - 1;
-    ELSE
-        inicio := n2 + 1;
-        fim := n1 - 1;
-    END IF;
-
-    RAISE NOTICE 'Intervalo considerado: % até %', inicio, fim;
-    numeros := ARRAY(SELECT generate_series(inicio, fim));
-    FOREACH num IN ARRAY numeros LOOP
-        IF num % 2 != 0 THEN
-            RAISE NOTICE 'Ímpar encontrado: %', num;
-            soma := soma + num;
-        END IF;
+    FOR i IN 1..3 LOOP
+        FOR j IN 1..3 LOOP
+            matriz[i][j] := valor_aleatorio_entre(1,12);
+        END LOOP;
     END LOOP;
-    RAISE NOTICE 'Soma dos ímpares: %', soma;
+
+    RAISE NOTICE 'Matriz gerada:';
+    FOREACH linha SLICE 1 IN ARRAY matriz LOOP
+        RAISE NOTICE '%', linha;
+    END LOOP;
+    determinante :=
+         matriz[1][1]*matriz[2][2]*matriz[3][3] +
+         matriz[1][2]*matriz[2][3]*matriz[3][1] +
+         matriz[1][3]*matriz[2][1]*matriz[3][2] -
+         (matriz[1][3]*matriz[2][2]*matriz[3][1] +
+          matriz[1][1]*matriz[2][3]*matriz[3][2] +
+          matriz[1][2]*matriz[2][1]*matriz[3][3]);
+    RAISE NOTICE 'Determinante: %', determinante;
 END
 $$
+
+-- exercício 1.1 com estrutura FOREACH para soma dos números ímpares
+-- DO
+-- $$
+-- DECLARE 
+--     n1 INT := valor_aleatorio_entre(0, 100) - 50;
+--     n2 INT := valor_aleatorio_entre(0, 100) - 50;
+--     inicio INT;
+--     fim INT;
+--     numeros INT[];
+--     num INT;
+--     soma INT := 0;
+-- BEGIN
+--     RAISE NOTICE 'Soma dos ímpares entre dois valores - FOREACH';
+--     RAISE NOTICE 'Valores sorteados: % e %', n1, n2;
+
+--     IF n1 < n2 THEN
+--         inicio := n1 + 1;
+--         fim := n2 - 1;
+--     ELSE
+--         inicio := n2 + 1;
+--         fim := n1 - 1;
+--     END IF;
+
+--     RAISE NOTICE 'Intervalo considerado: % até %', inicio, fim;
+--     numeros := ARRAY(SELECT generate_series(inicio, fim));
+--     FOREACH num IN ARRAY numeros LOOP
+--         IF num % 2 != 0 THEN
+--             RAISE NOTICE 'Ímpar encontrado: %', num;
+--             soma := soma + num;
+--         END IF;
+--     END LOOP;
+--     RAISE NOTICE 'Soma dos ímpares: %', soma;
+-- END
+-- $$
 
 
 -- exercício 1.1 com estrutura FOR para soma dos números ímpares
